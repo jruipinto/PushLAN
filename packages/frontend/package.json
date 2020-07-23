@@ -1,0 +1,18 @@
+{
+    "name": "frontend",
+    "version": "1.0.0",
+    "description": "frontend",
+    "scripts": {
+      "build": "node ./scripts/copy-to-dist.js"
+    },
+    "repository": "https://github.com/electron/electron-quick-start-typescript",
+    "keywords": [
+      "frontend"
+    ],
+    "author": "GitHub",
+    "license": "CC0-1.0",
+    "devDependencies": {
+      "fs-extra": "^9.0.1"
+    }
+  }
+  

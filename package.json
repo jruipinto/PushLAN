@@ -1,0 +1,12 @@
+{
+  "name": "root",
+  "private": true,
+  "scripts": {
+    "start": "npm run build && npx electron ./dist/electron-main/main.js",
+    "build": "npm run bootstrap && npx lerna run build",
+    "bootstrap": "npx lerna bootstrap --hoist && npm i --prefix ./packages/electron-main/"
+  },
+  "devDependencies": {
+    "lerna": "^3.22.1"
+  }
+}
