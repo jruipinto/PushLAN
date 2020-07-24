@@ -1,8 +1,8 @@
 {
   "host": "localhost",
   "port": 3030,
-  "public": "../../dist/frontend/",
-  "uploads": "../../uploads/",
+  "public": "dist/app/frontend/",
+  "uploads": "dist/uploads/",
   "paginate": {
     "default": 10,
     "max": 50

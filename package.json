@@ -2,11 +2,13 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start": "npm run build && npx electron ./dist/electron-main/main.js",
-    "build": "npm run bootstrap && npx lerna run build",
-    "bootstrap": "npx lerna bootstrap --hoist && npm i --prefix ./packages/electron-main/"
+    "start": "npm run build && npx electron ./dist/app/electron-main/src/main.js",
+    "build": "npm run clean && npm run bootstrap && npx lerna run build",
+    "bootstrap": "npx lerna bootstrap --hoist",
+    "clean": "shx rm -Rf ./dist/"
   },
   "devDependencies": {
-    "lerna": "^3.22.1"
+    "lerna": "^3.22.1",
+    "shx": "^0.3.2"
   }
 }

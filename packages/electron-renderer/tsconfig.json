@@ -3,15 +3,13 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "sourceMap": true,
-    "outDir": "../../dist/app",
-    "baseUrl": ".",    
-    "strict": true,
-    "esModuleInterop": true,
+    "outDir": "../../dist/app/electron-renderer",
+    "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]
     }
   },
   "include": [
-    "src/**/*", "../electron-renderer/src/preload.ts"
+    "src/**/*"
   ]
 }

@@ -27,9 +27,9 @@
     "test": "npm run lint && npm run compile && npm run mocha",
     "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
     "dev": "ts-node-dev --no-notify src/",
-    "start": "npm run build && node ../../dist/backend",
+    "start": "npm run buildOld && node ../../dist/app/backend",
     "mocha": "ts-mocha \"test/**/*.ts\" --recursive --exit",
-    "build": "shx rm -rf ../../dist/backend && tsc"
+    "buildOld": "shx rm -rf ../../dist/app/backend && tsc"
   },
   "standard": {
     "env": [

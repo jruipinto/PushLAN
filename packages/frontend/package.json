@@ -3,7 +3,7 @@
     "version": "1.0.0",
     "description": "frontend",
     "scripts": {
-      "build": "node ./scripts/copy-to-dist.js"
+      "build": "shx mkdir -p ../../dist/app/frontend && shx cp -fr ./ ../../dist/app/frontend"
     },
     "repository": "https://github.com/electron/electron-quick-start-typescript",
     "keywords": [
@@ -12,7 +12,7 @@
     "author": "GitHub",
     "license": "CC0-1.0",
     "devDependencies": {
-      "fs-extra": "^9.0.1"
+      "shx": "^0.3.2"
     }
   }
   

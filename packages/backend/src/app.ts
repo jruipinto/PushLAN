@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 
 import feathers from '@feathersjs/feathers';
+process.env.NODE_CONFIG_DIR = path.join(process.cwd(), 'dist/config/');
 import configuration from '@feathersjs/configuration';
 import express from '@feathersjs/express';
 import socketio from '@feathersjs/socketio';
@@ -23,24 +24,27 @@ const dauria = require('dauria');
 
 const app: Application = express(feathers());
 
-// feathers-blob service
-const blobService = require('feathers-blob');
-const blobStorage = require('fs-blob-store')(app.get('uploads'));
-const bodyParser = require('body-parser');
-
 // Don't remove this comment. It's needed to format import lines nicely.
 
 // Load app configuration
 app.configure(configuration());
+
+// feathers-blob service
+const uploadsDir = path.join(process.cwd(), app.get('uploads'));
+const blobService = require('feathers-blob');
+const blobStorage = require('fs-blob-store')(uploadsDir);
+const bodyParser = require('body-parser');
+
+
 // Enable security, CORS, compression, favicon and body parsing
 app.use(helmet());
 app.use(cors());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
+app.use(favicon(path.join(process.cwd(), app.get('public'), 'favicon.ico')));
 // Host the public folder
-app.use('/', express.static(app.get('public')));
+app.use('/', express.static(path.join(process.cwd(), app.get('public'))));
 
 // Parse HTTP JSON bodies
 app.use(bodyParser.json({ limit: '10mb' }));
@@ -80,7 +84,7 @@ app.use(
   '/files',
   function (req: any, res, next) {
     console.log('files got');
-    fs.readdir(app.get('uploads'), function (err: any, files: any) {
+    fs.readdir(uploadsDir, function (err: any, files: any) {
       if (err) {
         console.log('Unable to scan directory: ' + err);
       }

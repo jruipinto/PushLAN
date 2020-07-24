@@ -1,18 +1,19 @@
 {
-    "name": "electron-renderer",
-    "version": "1.0.0",
-    "description": "electron-renderer",
-    "scripts": {
-      "build": "node ./scripts/copy-to-dist.js"
-    },
-    "repository": "https://github.com/electron/electron-quick-start-typescript",
-    "keywords": [
-      "electron-renderer"
-    ],
-    "author": "GitHub",
-    "license": "CC0-1.0",
-    "devDependencies": {
-      "fs-extra": "^9.0.1"
-    }
+  "name": "electron-renderer",
+  "version": "1.0.0",
+  "description": "electron-renderer",
+  "scripts": {
+    "build": "tsc && shx cp -fr ./src/index.html ../../dist/app/electron-renderer",
+    "buildOld": "shx mkdir -p ../../dist/app/electron-renderer && shx cp -fr ./ ../../dist/app/electron-renderer"
+  },
+  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "keywords": [
+    "electron-renderer"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "shx": "^0.3.2",
+    "typescript": "^3.9.5"
   }
-  
+}

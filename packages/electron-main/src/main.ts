@@ -1,5 +1,21 @@
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
+
+/* feathers initialize */
+import feathers from '../../backend/src/app';
+import logger from '../../backend/src/logger';
+const port = feathers.get('port');
+const host = feathers.get('host');
+const server = feathers.listen(port);
+
+process.on('unhandledRejection', (reason, p) =>
+  logger.error('Unhandled Rejection at: Promise ', p, reason)
+);
+
+server.on('listening', () =>
+  logger.info('Feathers application started on http://%s:%d', host, port)
+);
+/* end */
 
 function createWindow() {
   // Create the browser window.
@@ -8,15 +24,17 @@ function createWindow() {
     height: 600,
     icon: path.join(__dirname, "icon/tape.png"),
     webPreferences: {
-      preload: path.join(__dirname, "preload.js"),
-    },
+      devTools: false,
+      nodeIntegration: true,
+      preload: path.join(process.cwd(), 'dist/app/electron-renderer/', 'preload.js')
+    }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, "../electron-renderer/index.html"));
+  mainWindow.loadFile(path.join(process.cwd(), 'dist/app/electron-renderer/', 'index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished
@@ -25,7 +43,7 @@ function createWindow() {
 app.on("ready", () => {
   createWindow();
 
-  app.on("activate", function () {
+  app.on("activate", () => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
@@ -43,3 +61,5 @@ app.on("window-all-closed", () => {
 
 // In this file you can include the rest of your app"s specific main process
 // code. You can also put them in separate files and require them here.
+
+Menu.setApplicationMenu(null);
