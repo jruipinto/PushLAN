@@ -1,4 +1,5 @@
 import { app, BrowserWindow, Menu } from "electron";
+if (require('electron-squirrel-startup')) { app.quit(); }
 import * as path from "path";
 
 /* feathers initialize */
