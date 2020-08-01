@@ -2,7 +2,7 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start": "electron-forge start",
+    "serve": "npm run build && npx electron ./dist/app/electron-main/src/main.js",
     "build": "npm run clean && npm run lerna:bootstrap && npm run lerna:build",
     "clean": "shx rm -Rf ./dist/",
     "lerna:build": "npx lerna run build",
