@@ -2,13 +2,22 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "start": "npm run build && npx electron ./dist/app/electron-main/src/main.js",
-    "build": "npm run clean && npm run bootstrap && npx lerna run build",
-    "bootstrap": "npx lerna bootstrap --hoist",
-    "clean": "shx rm -Rf ./dist/"
+    "start": "electron-forge start",
+    "build": "npm run clean && npm run lerna:bootstrap && npm run lerna:build",
+    "clean": "shx rm -Rf ./dist/",
+    "lerna:build": "npx lerna run build",
+    "lerna:bootstrap": "npx lerna bootstrap --hoist",
+    "electron:start": "npx electron ./dist/app/electron-main/src/main.js",
+    "electron-forge:import": "npx @electron-forge/cli import",
+    "electron-forge:make": "npx @electron-forge/cli make",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
   },
   "devDependencies": {
     "lerna": "^3.22.1",
     "shx": "^0.3.2"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.0"
   }
 }
