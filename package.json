@@ -1,23 +1,59 @@
 {
   "name": "root",
+  "version": " 0.0.1",
+  "description": "Lan-drive replaces your pen-drive by letting your share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
   "private": true,
+  "main": "./dist/app/electron-main/src/main.js",
+  "author": {
+    "name": "J Rui Pinto",
+    "email": "social.jruipinto@gmail.com"
+  },
   "scripts": {
     "serve": "npm run build && npx electron ./dist/app/electron-main/src/main.js",
     "build": "npm run clean && npm run lerna:bootstrap && npm run lerna:build",
     "clean": "shx rm -Rf ./dist/",
     "lerna:build": "npx lerna run build",
     "lerna:bootstrap": "npx lerna bootstrap --hoist",
-    "electron:start": "npx electron ./dist/app/electron-main/src/main.js",
-    "electron-forge:import": "npx @electron-forge/cli import",
-    "electron-forge:make": "npx @electron-forge/cli make",
-    "package": "electron-forge package",
-    "make": "electron-forge make"
+    "electron:start": "npx electron ./dist/app/electron-main/src/main.js"
   },
   "devDependencies": {
+    "electron-builder": "^22.8.0",
     "lerna": "^3.22.1",
     "shx": "^0.3.2"
   },
-  "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
-  }
+	"dependencies": {
+		"@feathersjs/configuration": "^4.5.5",
+		"@feathersjs/errors": "^4.5.5",
+		"@feathersjs/express": "^4.5.6",
+		"@feathersjs/feathers": "^4.5.5",
+		"@feathersjs/socketio": "^4.5.6",
+		"@feathersjs/transport-commons": "^4.5.5",
+		"@types/compression": "^1.7.0",
+		"@types/cors": "^2.8.6",
+		"@types/helmet": "0.0.47",
+		"@types/mocha": "^8.0.0",
+		"@types/multer": "^1.4.3",
+		"@types/node": "12.12.47",
+		"@types/serve-favicon": "^2.5.0",
+		"@typescript-eslint/eslint-plugin": "^3.6.1",
+		"@typescript-eslint/parser": "^3.6.1",
+		"axios": "^0.19.2",
+		"body-parser": "^1.19.0",
+		"compression": "^1.7.4",
+		"cors": "^2.8.5",
+		"dauria": "^2.0.0",
+		"electron-squirrel-startup": "^1.0.0",
+		"eslint": "^7.4.0",
+		"feathers-blob": "^2.2.0",
+		"fs-blob-store": "^5.2.1",
+		"helmet": "^3.23.3",
+		"mocha": "^8.0.1",
+		"multer": "^1.4.2",
+		"serve-favicon": "^2.5.0",
+		"ts-mocha": "^7.0.0",
+		"ts-node-dev": "^1.0.0-pre.52",
+		"tslint": "^6.1.2",
+		"typescript": "^3.9.5",
+		"winston": "^3.3.3"
+	}
 }

@@ -27,12 +27,12 @@ function createWindow() {
     webPreferences: {
       devTools: false,
       nodeIntegration: true,
-      preload: path.join(process.cwd(), 'dist/app/electron-renderer/', 'preload.js')
+      preload: path.join(__dirname, '..', '..','electron-renderer/', 'preload.js')
     }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(process.cwd(), 'dist/app/electron-renderer/', 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '..', '..','electron-renderer/', 'index.html'));
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();

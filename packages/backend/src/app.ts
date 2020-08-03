@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 
 import feathers from '@feathersjs/feathers';
-process.env.NODE_CONFIG_DIR = path.join(process.cwd(), 'dist/config/');
+process.env.NODE_CONFIG_DIR = path.join(__dirname, '..', 'config/');
 import configuration from '@feathersjs/configuration';
 import express from '@feathersjs/express';
 import socketio from '@feathersjs/socketio';
@@ -30,7 +30,7 @@ const app: Application = express(feathers());
 app.configure(configuration());
 
 // feathers-blob service
-const uploadsDir = path.join(process.cwd(), app.get('uploads'));
+const uploadsDir = app.get('uploads');
 const blobService = require('feathers-blob');
 const blobStorage = require('fs-blob-store')(uploadsDir);
 const bodyParser = require('body-parser');
@@ -42,9 +42,9 @@ app.use(cors());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(favicon(path.join(process.cwd(), app.get('public'), 'favicon.ico')));
+// app.use(favicon(path.join(process.cwd(), app.get('public'), 'favicon.ico')));
 // Host the public folder
-app.use('/', express.static(path.join(process.cwd(), app.get('public'))));
+app.use('/', express.static( app.get('public')));
 
 // Parse HTTP JSON bodies
 app.use(bodyParser.json({ limit: '10mb' }));
