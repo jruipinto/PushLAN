@@ -1,0 +1,19 @@
+{
+  "name": "renderer",
+  "version": "1.0.0",
+  "description": "renderer",
+  "scripts": {
+    "build": "tsc && shx cp -fr ./src/index.html ../../dist/app/renderer",
+    "buildOld": "shx mkdir -p ../../dist/app/renderer && shx cp -fr ./ ../../dist/app/renderer"
+  },
+  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "keywords": [
+    "renderer"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "shx": "^0.3.2",
+    "typescript": "^3.9.5"
+  }
+}

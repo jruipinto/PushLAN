@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "web-server",
   "description": "Lan-drive replaces your pen-drive by letting your share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
   "version": "0.0.0",
   "homepage": "",
@@ -27,9 +27,9 @@
     "test": "npm run lint && npm run compile && npm run mocha",
     "lint": "eslint src/. test/. --config .eslintrc.json --ext .ts --fix",
     "dev": "ts-node-dev --no-notify src/",
-    "start": "npm run buildOld && node ../../dist/app/backend",
+    "start": "npm run buildOld && node ../../dist/app/web-server",
     "mocha": "ts-mocha \"test/**/*.ts\" --recursive --exit",
-    "buildOld": "shx rm -rf ../../dist/app/backend && tsc"
+    "buildOld": "shx rm -rf ../../dist/app/web-server && tsc"
   },
   "standard": {
     "env": [

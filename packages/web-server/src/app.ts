@@ -30,7 +30,8 @@ const app: Application = express(feathers());
 app.configure(configuration());
 
 // feathers-blob service
-const uploadsDir = app.get('uploads');
+const getPath = (pathStr: string): string => path.join(__dirname, '..', '..', '..', app.get(pathStr));
+const uploadsDir = getPath('uploads');
 const blobService = require('feathers-blob');
 const blobStorage = require('fs-blob-store')(uploadsDir);
 const bodyParser = require('body-parser');
@@ -42,9 +43,9 @@ app.use(cors());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// app.use(favicon(path.join(process.cwd(), app.get('public'), 'favicon.ico')));
+app.use(favicon(path.join(getPath('public'), 'favicon.ico')));
 // Host the public folder
-app.use('/', express.static( app.get('public')));
+app.use('/', express.static(getPath('public')));
 
 // Parse HTTP JSON bodies
 app.use(bodyParser.json({ limit: '10mb' }));

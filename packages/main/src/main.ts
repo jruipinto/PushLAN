@@ -2,8 +2,8 @@ import { app, BrowserWindow, Menu } from "electron";
 import * as path from "path";
 
 /* feathers initialize */
-import feathers from '../../backend/src/app';
-import logger from '../../backend/src/logger';
+import feathers from '../../web-server/src/app';
+import logger from '../../web-server/src/logger';
 const port = feathers.get('port');
 const host = feathers.get('host');
 const server = feathers.listen(port);
@@ -26,12 +26,12 @@ function createWindow() {
     webPreferences: {
       devTools: false,
       nodeIntegration: true,
-      preload: path.join(__dirname, '..', '..','electron-renderer/', 'preload.js')
+      preload: path.join(__dirname, '..', '..','renderer/', 'preload.js')
     }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, '..', '..','electron-renderer/', 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '..', '..','renderer/', 'index.html'));
 
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();

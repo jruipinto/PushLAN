@@ -1,13 +1,13 @@
 {
-    "name": "frontend",
+    "name": "web-client",
     "version": "1.0.0",
-    "description": "frontend",
+    "description": "web-client",
     "scripts": {
-      "build": "shx mkdir -p ../../dist/app/frontend && shx cp -fr ./ ../../dist/app/frontend"
+      "build": "shx mkdir -p ../../dist/app/web-client && shx cp -fr ./ ../../dist/app/web-client"
     },
     "repository": "https://github.com/electron/electron-quick-start-typescript",
     "keywords": [
-      "frontend"
+      "web-client"
     ],
     "author": "GitHub",
     "license": "CC0-1.0",

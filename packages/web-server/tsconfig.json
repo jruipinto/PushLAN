@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es2018",
     "module": "commonjs",
-    "outDir": "../../dist/app/backend",
+    "outDir": "../../dist/app/web-server",
     "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true

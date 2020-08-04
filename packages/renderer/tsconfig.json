@@ -3,7 +3,7 @@
     "module": "commonjs",
     "noImplicitAny": true,
     "sourceMap": true,
-    "outDir": "../../dist/app/electron-renderer",
+    "outDir": "../../dist/app/renderer",
     "baseUrl": ".",
     "paths": {
       "*": ["node_modules/*"]

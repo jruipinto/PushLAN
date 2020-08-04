@@ -25,7 +25,7 @@ files:
 
 # Windows configuration
 win:
-  icon: "packages/electron-main/src/icon/icon.png"
+  icon: "packages/main/src/icon/icon.png"
   target:
     - "zip"
     - "nsis"
