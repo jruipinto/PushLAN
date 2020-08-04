@@ -9,7 +9,7 @@ files:
   - "package.json"
 
 
-# Mac OS configuration
+# # Mac OS configuration
 # mac:
 #   icon: "src/app/assets/images/icon.icns"
 
@@ -23,37 +23,37 @@ files:
 #       type: "link"
 #       path: "/Applications"
 
-# # Windows configuration
-# win:
-#   icon: "src/app/assets/images/icon.ico"
-#   target:
-#     - "zip"
-#     - "nsis"
+# Windows configuration
+win:
+  icon: "packages/electron-main/src/icon/icon.png"
+  target:
+    - "zip"
+    - "nsis"
 
-# # Config for the windows installer
-# nsis:
-#   oneClick: true
-#   perMachine: true
+# Config for the windows installer
+nsis:
+  oneClick: true
+  perMachine: true
 
-# # Linux configuration
-# linux:
-#   category: Development
-#   target:
-#     - "AppImage"
-#     - "deb"
-#     - "rpm"
+# Linux configuration
+linux:
+  category: Development
+  target:
+    - "AppImage"
+    - "deb"
+    - "rpm"
 
-# deb:
-#   depends:
-#     # --- Default START
-#     - gconf2
-#     - gconf-service
-#     - libnotify4
-#     - libappindicator1
-#     - libxtst6
-#     - libnss3
-#     # --- Default END
-#     - libsecret-1-0 # This is needed for keytar on linux
+deb:
+  depends:
+    # --- Default START
+    - gconf2
+    - gconf-service
+    - libnotify4
+    - libappindicator1
+    - libxtst6
+    - libnss3
+    # --- Default END
+    - libsecret-1-0 # This is needed for keytar on linux
 
 directories:
   # buildResources: "resources"

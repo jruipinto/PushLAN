@@ -11,7 +11,8 @@
   "scripts": {
     "serve": "npm run build && npx electron ./dist/app/electron-main/src/main.js",
     "build": "npm run clean && npm run lerna:bootstrap && npm run lerna:build",
-    "clean": "shx rm -Rf ./dist/",
+	"release": "npm run build && electron-builder",
+    "clean": "shx rm -Rf ./dist/ && shx rm -Rf ./release/",
     "lerna:build": "npx lerna run build",
     "lerna:bootstrap": "npx lerna bootstrap --hoist",
     "electron:start": "npx electron ./dist/app/electron-main/src/main.js"
@@ -42,7 +43,6 @@
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
 		"dauria": "^2.0.0",
-		"electron-squirrel-startup": "^1.0.0",
 		"eslint": "^7.4.0",
 		"feathers-blob": "^2.2.0",
 		"fs-blob-store": "^5.2.1",
