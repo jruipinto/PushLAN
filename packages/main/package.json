@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "A minimal Electron application written with Typescript",
   "scripts": {
-    "build": "tsc && npm run copyIconToDist && npm run copyWebServerConfigToDist && shx mkdir -p ../../dist/uploads",
+    "buildMain": "tsc && npm run copyIconToDist && npm run copyWebServerConfigToDist && shx mkdir -p ../../dist/uploads",
     "watch": "tsc -w",
     "lint": "tslint -c tslint.json -p tsconfig.json",
     "start": "electron ../../dist/main/src/main.js",
