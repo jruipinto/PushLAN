@@ -26,7 +26,7 @@ function createWindow() {
     webPreferences: {
       devTools: false,
       nodeIntegration: true,
-      preload: path.join(__dirname, '..', '..','renderer/', 'preload.js')
+      preload: './preload.js'
     }
   });
 
