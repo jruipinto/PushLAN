@@ -1,4 +1,4 @@
-import { app, BrowserWindow, Menu } from "electron";
+import { app, BrowserWindow, Menu, ipcMain } from "electron";
 import * as path from "path";
 
 /* feathers initialize */
@@ -6,15 +6,19 @@ import feathers from '../../web-server/src/app';
 import logger from '../../web-server/src/logger';
 const port = feathers.get('port');
 const host = feathers.get('host');
-const server = feathers.listen(port);
+ipcMain.on('start-server', (event, arg) => {
+  const server = feathers.listen(port);
 
-process.on('unhandledRejection', (reason, p) =>
-  logger.error('Unhandled Rejection at: Promise ', p, reason)
-);
+  process.on('unhandledRejection', (reason, p) =>
+    logger.error('Unhandled Rejection at: Promise ', p, reason)
+  );
 
-server.on('listening', () =>
-  logger.info('Feathers application started on http://%s:%d', host, port)
-);
+  server.on('listening', () =>
+    logger.info('Feathers application started on http://%s:%d', host, port)
+  );
+
+  event.returnValue = true;
+});
 /* end */
 
 function createWindow() {
@@ -24,17 +28,17 @@ function createWindow() {
     height: 600,
     icon: path.join(__dirname, "icon/icon.png"),
     webPreferences: {
-      devTools: false,
+      devTools: true,
       nodeIntegration: true,
       preload: './preload.js'
     }
   });
 
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, '..', '..','renderer/', 'index.html'));
+  mainWindow.loadFile(path.join(__dirname, '..', '..', 'renderer/', 'index.html'));
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished

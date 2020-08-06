@@ -1,6 +1,12 @@
 <h1>Welcome to Lan Drive App</h1>
-<p>
-  To upload files and manage your shared files from other
-  computer on your LAN (loca area network) go to:
-</p>
-<h2>localhost:3030</h2>
+
+<div *ngIf="webServerStarted;else webServerNotStarted">
+  <p>
+    To upload files and manage your shared files from other
+    computer on your LAN (loca area network) go to:
+  </p>
+  <h2>localhost:3030</h2>
+</div>
+<ng-template #webServerNotStarted>
+  <button (click)='startWebServer()'>Start sharing</button>
+</ng-template>
