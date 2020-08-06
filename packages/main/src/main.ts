@@ -1,5 +1,6 @@
 import { app, BrowserWindow, Menu, ipcMain } from "electron";
 import * as path from "path";
+import * as ip from 'ip';
 
 /* feathers initialize */
 import feathers from '../../web-server/src/app';
@@ -17,7 +18,10 @@ ipcMain.on('start-server', (event, arg) => {
     logger.info('Feathers application started on http://%s:%d', host, port)
   );
 
-  event.returnValue = true;
+  event.returnValue = {
+    webServerStarted: true,
+    ip: ip.address()
+  };
 });
 /* end */
 
