@@ -6,6 +6,7 @@
     computer on your LAN (loca area network) go to:
   </p>
   <h2>{{webServerIPAddress}}:3030</h2>
+  <qrcode [qrdata]="QR" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
 </div>
 <ng-template #webServerNotStarted>
   <button (click)='startWebServer()'>Start sharing</button>
