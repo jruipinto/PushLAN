@@ -1,5 +1,6 @@
 ## Web-Server
 
+- welcome component
 - component to select the folder to be shared
 - 1 button to start/stop server
 - 1 component to display current ip address and port of webserver
