@@ -8,8 +8,13 @@ import { ElectronService } from 'ngx-electron';
 })
 export class AppComponent {
   public webServerStarted = false;
-  public webServerIPAddress: string;
+  public webServerURL: string;
   public QR: string = null;
+  public urlList = [
+    'http://192.168.4.26:3030',
+    'http://192.168.99.3:3030',
+    'http://192.168.47.1:3030'
+  ];
 
   constructor(private electronService: ElectronService) { }
 
@@ -17,10 +22,12 @@ export class AppComponent {
     if (this.electronService.isElectronApp) {
       const mainsFeedback: any = this.electronService.ipcRenderer.sendSync('start-server');
       this.webServerStarted = mainsFeedback.webServerStarted ?? false;
-      this.webServerIPAddress = mainsFeedback.ip;
-      this.QR = 'http://' + this.webServerIPAddress + ':3030';
+      this.webServerURL = 'http://' + mainsFeedback.ip + ':3030';
+      this.QR = this.webServerURL;
     } else {
       console.log('this.electronService.isElectronApp === false');
     }
   }
+
+  public stopWebServer(): void {}
 }
