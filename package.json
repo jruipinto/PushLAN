@@ -10,7 +10,9 @@
   },
   "scripts": {
     "serve": "npm run build && npx electron ./dist/app/main/src/main.js",
+    "serve:quick": "npm run build:quick && npx electron ./dist/app/main/src/main.js",
     "build": "npm run clean && npm run lerna:bootstrap && npm run lerna:build && npm run buildMain --prefix packages/main",
+    "build:quick": "npm run clean && npm run lerna:build && npm run buildMain --prefix packages/main",
     "release": "npm run build && electron-builder",
     "clean": "shx rm -Rf ./dist/ && shx rm -Rf ./release/",
     "lerna:build": "npx lerna run build",
