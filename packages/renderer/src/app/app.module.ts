@@ -7,10 +7,18 @@ import { NgxElectronModule } from 'ngx-electron';
 import { QRCodeModule } from 'angularx-qrcode';
 
 import { AppComponent } from './app.component';
+import { DeveloperCreditComponent } from './components/developer-credit/developer-credit.component';
+import { ShareIconComponent } from './components/share-icon/share-icon.component';
+import { StartIconComponent } from './components/start-icon/start-icon.component';
+import { StopIconComponent } from './components/stop-icon/stop-icon.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DeveloperCreditComponent,
+    ShareIconComponent,
+    StartIconComponent,
+    StopIconComponent
   ],
   imports: [
     BrowserModule,

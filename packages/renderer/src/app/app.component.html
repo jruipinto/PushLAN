@@ -1,13 +1,39 @@
-<h1>Welcome to Lan Drive App</h1>
+<div class="container">
 
-<div *ngIf="webServerStarted;else webServerNotStarted">
-  <p>
-    To upload files and manage your shared files from other
-    computer on your LAN (loca area network) go to:
-  </p>
-  <h2>{{webServerIPAddress}}:3030</h2>
-  <qrcode [qrdata]="QR" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+  <h1>Welcome to Lan Drive App</h1>
+
+  <div class="row">
+    <button type="button" id="btn-shared-folder">
+      <app-share-icon></app-share-icon>
+      Shared folder
+    </button>
+    <input type="text" name="shared-folder" id="input-shared-folder">
+  </div>
+
+  <div class="row">
+    <div *ngIf="!webServerStarted;else webServerNotStarted">
+      <button type="button" class="primary" (click)='startWebServer()'>
+        <app-start-icon></app-start-icon>
+        Start serving
+      </button>
+    </div>
+    <ng-template #webServerNotStarted>
+      <button type="button" class="primary" (click)='stopWebServer()'>
+        <app-stop-icon></app-stop-icon>
+        Stop serving
+      </button>
+    </ng-template>
+  </div>
+
+  <div class="row" *ngIf="webServerStarted">
+    <p class="mt-2 mb-0">Serving the shared folder.</p>
+    <p class="mt-0 mb-2">Copy the following URL to the browser of your devices or scan the QR code.</p>
+    <h2 class="text-align-center">{{webServerURL}}</h2>
+    <qrcode class="text-align-center" [qrdata]="QR" [width]="100" [errorCorrectionLevel]="'M'"></qrcode>
+    <p>If you can’t access the URL above, try these alternative URL’s or check your local area network connection.</p>
+    <p *ngFor="let url of urlList" class="mt-0 mb-0">{{url}}</p>
+  </div>
+
+  <app-developer-credit></app-developer-credit>
+
 </div>
-<ng-template #webServerNotStarted>
-  <button (click)='startWebServer()'>Start sharing</button>
-</ng-template>
