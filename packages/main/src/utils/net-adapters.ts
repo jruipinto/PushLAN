@@ -1,32 +1,39 @@
 'use strict';
 
-const { networkInterfaces } = require('os');
+import { networkInterfaces } from 'os';
 
-// const nets = networkInterfaces();
-// const results = []; // or just '{}', an empty object
-
-// for (const name of Object.keys(nets)) {
-//     for (const net of nets[name]) {
-//         // skip over non-ipv4 and internal (i.e. 127.0.0.1) addresses
-//         if (net.family === 'IPv4' && !net.internal) {
-//             results.push({adapter: name, ip: net.address});
-//         }
-//     }
-// }
-
-// console.log('nets: ', nets);
-// console.log('results: ', results);
-
-
-const adapters = networkInterfaces();
-const results = Object.keys(adapters)
-    .map(name => adapters[name]
-        .map(netInterfaceInfo => ({ name, ...netInterfaceInfo }))
+export interface AdapterIPv4Info {
+    name: string;
+    address: string;
+    netmask: string;
+    family: 'IPv4' | 'IPv6';
+    mac: string;
+    internal: boolean;
+    cidr: string | null;
+}
+function orderAdapter(acc: AdapterIPv4Info[], currentAdapter: AdapterIPv4Info): AdapterIPv4Info[] {
+    if (/^ethernet|^wi\-fi/i.test(currentAdapter.name)) {
+        return ([currentAdapter, ...acc]);
+    } else {
+        return ([...acc, currentAdapter])
+    }
+}
+export function netAdapters(): AdapterIPv4Info[] {
+    const adapters = networkInterfaces();
+    return (
+        // convert networkInterfaces() object to an array of adapters (wifi, ethernet, etc..)
+        Object.keys(adapters)
+            .map(name => adapters[name]
+                .map(netInterfaceInfo => ({ name, ...netInterfaceInfo }))
+            )
+            // exclude all 'internal' adapters
+            .filter(adapter => !adapter[0].internal)
+            // filter NetworkInterfaceInfos that aren't of 'IPv4' family
+            .map(adapter => adapter
+                .filter(({ family }) => family === 'IPv4')
+            )
+            // as there is there is only one 'IPv4' per adapter, then we map to the first object
+            .map(adapter => adapter[0])
+            .reduce(orderAdapter, [])
     )
-    .filter(adapter => !adapter[0].internal)
-    .map(adapter => adapter
-        .filter(netInterfaceInfo => netInterfaceInfo.family === 'IPv4')
-    )
-
-// console.log('adapters: ', adapters);
-console.log('results: ', results);
+}

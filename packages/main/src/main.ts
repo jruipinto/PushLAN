@@ -1,6 +1,6 @@
 import { app, BrowserWindow, Menu, ipcMain } from "electron";
 import * as path from "path";
-import * as ip from 'ip';
+import { netAdapters } from './utils/net-adapters'
 
 /* feathers initialize */
 import feathers from '../../web-server/src/app';
@@ -20,7 +20,7 @@ ipcMain.on('start-server', (event, arg) => {
 
   event.returnValue = {
     webServerStarted: true,
-    ip: ip.address()
+    netAdpaters: netAdapters()
   };
 });
 /* end */

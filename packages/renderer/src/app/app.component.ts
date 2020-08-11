@@ -20,14 +20,17 @@ export class AppComponent {
 
   public startWebServer(): void {
     if (this.electronService.isElectronApp) {
-      const mainsFeedback: any = this.electronService.ipcRenderer.sendSync('start-server');
-      this.webServerStarted = mainsFeedback.webServerStarted ?? false;
-      this.webServerURL = 'http://' + mainsFeedback.ip + ':3030';
-      this.QR = this.webServerURL;
+      const {
+        webServerStarted,
+        netAdpaters
+      } = this.electronService.ipcRenderer.sendSync('start-server');
+      this.webServerStarted = webServerStarted ?? false;
+      this.urlList = netAdpaters.map(netAdpater => 'http://' + netAdpater.address + ':3030');
+      this.QR = this.urlList[0];
     } else {
       console.log('this.electronService.isElectronApp === false');
     }
   }
 
-  public stopWebServer(): void {}
+  public stopWebServer(): void { }
 }
