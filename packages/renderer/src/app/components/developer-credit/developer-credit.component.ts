@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { ElectronService } from 'ngx-electron';
 
 @Component({
   selector: 'app-developer-credit',
@@ -6,11 +7,12 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./developer-credit.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DeveloperCreditComponent implements OnInit {
+export class DeveloperCreditComponent {
 
-  constructor() { }
+  constructor(private electronService: ElectronService) { }
 
-  ngOnInit(): void {
+  public openExternal(url: string): Promise<void> {
+    return this.electronService.shell.openExternal(url);
   }
 
 }

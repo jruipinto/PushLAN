@@ -1,4 +1,4 @@
-:host{
+:host {
   position: absolute;
   font-size: 1rem;
   bottom: 1rem;
@@ -6,4 +6,8 @@
 }
 svg {
   margin-bottom: -4px;
+}
+a {
+  cursor: pointer;
+  text-decoration: underline;
 }
