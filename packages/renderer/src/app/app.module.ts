@@ -11,6 +11,7 @@ import { DeveloperCreditComponent } from './components/developer-credit/develope
 import { ShareIconComponent } from './components/share-icon/share-icon.component';
 import { StartIconComponent } from './components/start-icon/start-icon.component';
 import { StopIconComponent } from './components/stop-icon/stop-icon.component';
+import { BackgroundIlustrationComponent } from './components/background-ilustration/background-ilustration.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { StopIconComponent } from './components/stop-icon/stop-icon.component';
     DeveloperCreditComponent,
     ShareIconComponent,
     StartIconComponent,
-    StopIconComponent
+    StopIconComponent,
+    BackgroundIlustrationComponent
   ],
   imports: [
     BrowserModule,
