@@ -7,7 +7,8 @@ import feathers from '../../web-server/src/app';
 import logger from '../../web-server/src/logger';
 const port = feathers.get('port');
 const host = feathers.get('host');
-ipcMain.on('start-server', (event, arg) => {
+ipcMain.on('start-server', (event, folderToShare) => {
+  feathers.set('uploads', folderToShare);
   const server = feathers.listen(port);
 
   process.on('unhandledRejection', (reason, p) =>
@@ -32,6 +33,7 @@ function createWindow() {
     height: 600,
     icon: path.join(__dirname, "icon/icon.png"),
     webPreferences: {
+      enableRemoteModule: true,
       devTools: true,
       nodeIntegration: true,
       preload: './preload.js'

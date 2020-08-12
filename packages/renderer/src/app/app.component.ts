@@ -15,6 +15,7 @@ export class AppComponent {
     'http://192.168.99.3:3030',
     'http://192.168.47.1:3030'
   ];
+  public sharedFolder: string = null;
 
   constructor(private electronService: ElectronService) { }
 
@@ -23,7 +24,7 @@ export class AppComponent {
       const {
         webServerStarted,
         netAdpaters
-      } = this.electronService.ipcRenderer.sendSync('start-server');
+      } = this.electronService.ipcRenderer.sendSync('start-server', this.sharedFolder);
       this.webServerStarted = webServerStarted ?? false;
       this.urlList = netAdpaters.map(netAdpater => 'http://' + netAdpater.address + ':3030');
       this.QR = this.urlList[0];
@@ -33,4 +34,12 @@ export class AppComponent {
   }
 
   public stopWebServer(): void { }
+
+  public searchFolderToShare(): void {
+    this.electronService.remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
+      .then(({ filePaths }) => this.sharedFolder = filePaths[0])
+      .catch(err => {
+        this.electronService.remote.dialog.showErrorBox('Error with choosen folder', err);
+      });
+  }
 }

@@ -3,11 +3,11 @@
   <h1>Welcome to Lan Drive App</h1>
 
   <div class="row">
-    <button type="button" id="btn-shared-folder">
+    <button type="button" id="btn-shared-folder" (click)="searchFolderToShare()">
       <app-share-icon></app-share-icon>
       Shared folder
     </button>
-    <input type="text" name="shared-folder" id="input-shared-folder">
+    <input type="text" name="shared-folder" id="input-shared-folder" [(ngModel)]="sharedFolder">
   </div>
 
   <div class="row">
