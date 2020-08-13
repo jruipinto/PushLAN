@@ -35,7 +35,7 @@ function createWindow() {
     icon: path.join(__dirname, "icon/icon.png"),
     webPreferences: {
       enableRemoteModule: true,
-      devTools: true,
+      devTools: false,
       nodeIntegration: true,
       preload: './preload.js'
     }
@@ -45,7 +45,7 @@ function createWindow() {
   mainWindow.loadFile(path.join(__dirname, '..', '..', 'renderer/', 'index.html'));
 
   // Open the DevTools.
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 }
 
 // This method will be called when Electron has finished
