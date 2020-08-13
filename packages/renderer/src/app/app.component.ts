@@ -33,7 +33,9 @@ export class AppComponent {
     }
   }
 
-  public stopWebServer(): void { }
+  public stopWebServer(): void {
+    this.electronService.remote.app.quit();
+  }
 
   public searchFolderToShare(): void {
     this.electronService.remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
