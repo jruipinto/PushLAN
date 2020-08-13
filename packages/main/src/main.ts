@@ -7,10 +7,11 @@ import feathers from '../../web-server/src/app';
 import logger from '../../web-server/src/logger';
 const port = feathers.get('port');
 const host = feathers.get('host');
-ipcMain.on('start-server', (event, folderToShare) => {
-  feathers.set('uploads', folderToShare);
-  const server = feathers.listen(port);
+ipcMain.on('start-server', (startEvent, folderToShare) => {
 
+  feathers.service('/uploads').Model.path = path.join(folderToShare);
+
+  const server = feathers.listen(port);
   process.on('unhandledRejection', (reason, p) =>
     logger.error('Unhandled Rejection at: Promise ', p, reason)
   );
@@ -19,7 +20,7 @@ ipcMain.on('start-server', (event, folderToShare) => {
     logger.info('Feathers application started on http://%s:%d', host, port)
   );
 
-  event.returnValue = {
+  startEvent.returnValue = {
     webServerStarted: true,
     netAdpaters: netAdapters()
   };
