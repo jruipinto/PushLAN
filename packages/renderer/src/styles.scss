@@ -38,12 +38,12 @@ p {
   letter-spacing: -0.01em;
 }
 a,
-button,
-input[type="text"] {
+.btn,
+.input-text {
   color: $primary-color;
 }
-button,
-input[type="text"] {
+.btn,
+.input-text {
   background-color: transparent;
   border: 2px solid $primary-color;
   box-sizing: border-box;
@@ -51,28 +51,30 @@ input[type="text"] {
   min-width: 210px;
   padding: 0.6rem 2.5rem;
 }
-button {
+.btn {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
   text-transform: uppercase;
   cursor: pointer;
 }
-#btn-shared-folder {
-  box-sizing: border-box;
-  border-radius: 5px 0px 0px 5px;
-}
-#btn-shared-folder:hover {
+.btn:hover{
   background-color: lighten($color: $primary-color, $amount: 75%);
 }
-#input-shared-folder {
-  box-sizing: border-box;
-  border-radius: 0px 5px 5px 0px;
-  margin-left: -2px;
-  min-width: calc(98% - 200px);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: calc(0.6rem + 4px);
+.input-group {
+  .btn {
+    box-sizing: border-box;
+    border-radius: 5px 0px 0px 5px;
+  }
+  .input-text {
+    box-sizing: border-box;
+    border-radius: 0px 5px 5px 0px;
+    margin-left: -2px;
+    min-width: calc(98% - 200px);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: calc(0.6rem + 4px);
+  }
 }
 
 .container {
@@ -113,4 +115,27 @@ button {
 }
 .text-align-center {
   text-align: center;
+}
+:disabled {
+  cursor: default;
+}
+.btn:disabled {
+  background-color: $background-color;
+  border-color: $disabled-color;
+  color: $disabled-color;
+  path {
+    fill: $disabled-color;
+  }
+}
+.btn.primary:disabled {
+  background-color: $disabled-color;
+  border-color: $disabled-color;
+  color: $background-color;
+  path {
+    fill: $background-color;
+  }
+}
+.input-text:disabled {
+  border-color: $disabled-color;
+  color: $disabled-color;
 }

@@ -3,22 +3,24 @@
   <h1>Welcome to Lan Drive App</h1>
 
   <div class="row">
-    <button type="button" id="btn-shared-folder" (click)="searchFolderToShare()">
-      <app-share-icon></app-share-icon>
-      Shared folder
-    </button>
-    <input type="text" name="shared-folder" id="input-shared-folder" [(ngModel)]="sharedFolder">
+    <div class="input-group">
+      <button type="button" class="btn" id="btn-shared-folder" (click)="searchFolderToShare()" [disabled]="webServerStarted">
+        <app-share-icon></app-share-icon>
+        Shared folder
+      </button>
+      <input type="text" class="input-text" name="shared-folder" id="input-shared-folder" [(ngModel)]="sharedFolder" [disabled]="webServerStarted">
+    </div>
   </div>
 
   <div class="row">
     <div *ngIf="!webServerStarted;else webServerNotStarted">
-      <button type="button" class="primary" (click)='startWebServer()'>
+      <button type="button" class="btn primary" (click)='startWebServer()' [disabled]="!sharedFolder">
         <app-start-icon></app-start-icon>
         Start serving
       </button>
     </div>
     <ng-template #webServerNotStarted>
-      <button type="button" class="primary" (click)='stopWebServer()'>
+      <button type="button" class="btn primary" (click)='stopWebServer()'>
         <app-stop-icon></app-stop-icon>
         Stop serving
       </button>
