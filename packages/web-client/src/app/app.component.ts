@@ -7,8 +7,13 @@ import { FeathersService } from './shared/services/feathers.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  constructor(private backend: FeathersService) { }
+  fileInput = document.getElementById('file') as any;
+  constructor(private backend: FeathersService) {
+    const myFile = this.fileInput.files[0] ?? null;
+    this.fileInput.addEventListener('change', () => { console.log(myFile) });
+  }
 
-  uploadFile(){
+  uploadFile(uri: any) {
+    this.backend.service('uploads').create({ uri });
   }
 }
