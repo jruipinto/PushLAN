@@ -1,2 +1,12 @@
 <h1>Let's upload some files!</h1>
 <form action="/uploads" class="dropzone" id="my-awesome-dropzone"></form>
+
+<form method="post" enctype="multipart/form-data">
+  <div>
+    <label for="file">Choose file to upload</label>
+    <input type="file" id="file" name="uri">
+  </div>
+  <div>
+    <button (click)="uploadFile()">Submit</button>
+  </div>
+</form>

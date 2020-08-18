@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FeathersService } from './shared/services/feathers.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'web-client';
+  constructor(private backend: FeathersService) { }
+
+  uploadFile(){
+  }
 }
