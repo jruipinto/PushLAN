@@ -18,14 +18,13 @@ export class AppComponent {
     const uploadService = this.backend.service('uploads');
     const reader = new FileReader();
     // when encoded, upload
-    reader.addEventListener('load', () => {
-      uploadService
-        .create({ uri: reader.result, id: file.name })
-        .then(response => {
-          // success
-          console.log('Server responded with: ', response);
-        });
-    }, false);
+    reader.onload = () => uploadService
+      .create({ uri: reader.result, id: file.name })
+      .then(response => {
+        // success
+        console.log('Server responded with: ', response);
+      })
+      .catch(alert);
     // encode dataURI
     reader.readAsDataURL(file);
 

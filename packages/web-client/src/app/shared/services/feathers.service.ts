@@ -11,7 +11,7 @@ import socketIO from '@feathersjs/socketio-client';
 export class FeathersService {
 
   private feathers = feathers();                     // init socket.io
-  private socket = io('http://localhost:3030');      // init feathers
+  private socket = io(window.location.href);      // init feathers
 
   constructor() {
     this.feathers
