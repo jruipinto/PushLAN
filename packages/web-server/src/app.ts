@@ -16,15 +16,32 @@ import { Application } from './declarations';
 import logger from './logger';
 import channels from './channels';
 const fs = require('fs');
-
 const multer = require('multer');
-const multipartMiddleware = multer();
-const dauria = require('dauria');
 
 
 const app: Application = express(feathers());
 
 // Don't remove this comment. It's needed to format import lines nicely.
+
+
+// Files Service Class
+// A files service that allows to create new
+// and return all existing files
+class FilesService {
+
+  async find() {
+    return new Promise((resolve, reject) => {
+      fs.readdir(uploadsDir, (err: any, files: any) => err ? reject(err) : resolve(files));
+    });
+  }
+
+  async create(data: any) {
+    // you use this method to save in DB but as the purpose of the app is
+    // to be an upload server, you already used multer to save files before
+    // this Service in app.use('files', multer.any(), new FileService)
+    return data;
+  }
+}
 
 // Load app configuration
 app.configure(configuration());
@@ -32,9 +49,13 @@ app.configure(configuration());
 // feathers-blob service
 const getPath = (pathStr: string): string => path.join(__dirname, '..', '..', '..', app.get(pathStr));
 const uploadsDir = getPath('uploads');
-const blobService = require('feathers-blob');
-const blobStorage = require('fs-blob-store')(uploadsDir);
-const bodyParser = require('body-parser');
+const storage = multer.diskStorage({
+  destination: uploadsDir,
+  filename: function (req: any, file: any, cb: any) {
+    cb(null, file.originalname);
+  },
+});
+const upload = multer({ storage });
 
 
 // Enable security, CORS, compression, favicon and body parsing
@@ -47,52 +68,16 @@ app.use(favicon(path.join(getPath('public'), 'favicon.ico')));
 // Host the public folder
 app.use('/', express.static(getPath('public')));
 
-// Parse HTTP JSON bodies
-app.use(bodyParser.json({ limit: '10mb' }));
-// Parse URL-encoded params
-app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 // Set up Plugins and providers
 app.configure(express.rest());
 app.configure(socketio());
 
-// Upload Service with multipart support
-app.use('/uploads',
+// Register Upload Service with multipart support
 
-  multipartMiddleware.single('uri'),
-
-  function (req: any, res, next) {
-    req.feathers.file = req.file;
-    next();
-  },
-
-  blobService({ Model: blobStorage })
-).hooks({
-  before: {
-    create: [
-      function (hook) {
-        if (!hook.data.uri && hook.params.file) {
-          const file = hook.params.file;
-          const uri = dauria.getBase64DataURI(file.buffer, file.mimetype);
-          hook.data = { uri: uri };
-        }
-      }
-    ]
-  }
-});
-
-app.use(
-  '/files',
-  function (req: any, res, next) {
-    console.log('files got');
-    fs.readdir(uploadsDir, function (err: any, files: any) {
-      if (err) {
-        console.log('Unable to scan directory: ' + err);
-      }
-      files.forEach(console.log);
-    });
-    next();
-  }
+app.use('/files',
+  upload.any(),
+  new FilesService()
 );
 
 app.configure(channels);

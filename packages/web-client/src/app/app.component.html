@@ -1,12 +1,5 @@
 <h1>Let's upload some files!</h1>
-<form action="/uploads" class="dropzone" id="my-awesome-dropzone"></form>
-
-<form method="post" enctype="multipart/form-data">
-  <div>
-    <label for="file">Choose file to upload</label>
-    <input type="file" id="file" name="uri" (change)="uploadFile($event)">
-  </div>
-  <div>
-    <button>Submit</button>
-  </div>
-</form>
+<div>
+  <label for="files_input" id="files_input_label">Upload</label>
+  <input type="file" id="files_input" onchange="upload(files)" multiple>
+</div>
