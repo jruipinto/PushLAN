@@ -9,14 +9,11 @@ import { setErrorInLabel, setSuccessInLabel, writeTheFollowing } from './functio
 })
 export class AppComponent implements AfterViewInit {
 
-  public apiURL = window.location.href + 'files';
-  public uploadLbl = document.getElementById('files_input_label');
-
   constructor(private backend: FeathersService) {
   }
 
   ngAfterViewInit(): void {
-    function logFile(file): void {
+    const logFile = (file): void => {
       console.log('New file was uploaded:', file);
       this.backend.service('files').find()
         .then(result => { console.log('results:', result); })
@@ -26,20 +23,22 @@ export class AppComponent implements AfterViewInit {
   }
 
   public upload(filesList): void {
+    const apiURL = window.location.href + 'files';
+    const uploadLbl = document.getElementById('files_input_label');
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
-    function handleXHRError(err): void {
-      setErrorInLabel(this.uploadLbl);
+    const handleXHRError = (err): void => {
+      setErrorInLabel(uploadLbl);
       console.log(err);
     }
-    function handleXHRLoad(load): void {
-      setSuccessInLabel(this.uploadLbl);
+    const handleXHRLoad = (load): void => {
+      setSuccessInLabel(uploadLbl);
       console.log('LOAD result:', load);
     }
-    function handleXHRProgress(progress): void {
+    const handleXHRProgress = (progress): void => {
       const { total, loaded } = progress;
       const progressPercent = `${Math.round((loaded * 100) / total)}%`;
-      writeTheFollowing(progressPercent).to(this.uploadLbl);
+      writeTheFollowing(progressPercent).to(uploadLbl);
       console.log('progress:', progressPercent);
     }
     xhr.upload.addEventListener('error', handleXHRError);
@@ -48,7 +47,7 @@ export class AppComponent implements AfterViewInit {
     Array.from(filesList).forEach((file: any) => {
       formData.append('file', file);
     });
-    xhr.open('POST', this.apiURL);
+    xhr.open('POST', apiURL);
     xhr.send(formData);
   }
 }
