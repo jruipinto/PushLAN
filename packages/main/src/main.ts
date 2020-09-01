@@ -9,7 +9,7 @@ const port = feathers.get('port');
 const host = feathers.get('host');
 ipcMain.on('start-server', (startEvent, folderToShare) => {
 
-  feathers.service('/uploads').Model.path = path.join(folderToShare);
+  feathers.service('/files').uploadsPath = path.join(folderToShare);
 
   const server = feathers.listen(port);
   process.on('unhandledRejection', (reason, p) =>

@@ -28,18 +28,25 @@ const app: Application = express(feathers());
 // A files service that allows to create new
 // and return all existing files
 class FilesService {
+  public uploadsPath = '/uploads';
+
+  public storage = multer.diskStorage({
+    destination: this.uploadsPath,
+    filename: function (req: any, file: any, cb: any) {
+      cb(null, file.originalname);
+    },
+  });
+  public upload = multer({ storage: this.storage }).any();
 
   async find() {
     return new Promise((resolve, reject) => {
-      fs.readdir(uploadsDir, (err: any, files: any) => err ? reject(err) : resolve(files));
+      fs.readdir(this.uploadsPath, (err: any, files: any) => err ? reject(err) : resolve(files));
     });
   }
 
-  async create(data: any) {
-    // you use this method to save in DB but as the purpose of the app is
-    // to be an upload server, you already used multer to save files before
-    // this Service in app.use('files', multer.any(), new FileService)
-    return data;
+  async create(...args: any) {
+    this.upload(...args);
+    return args.data;
   }
 }
 
@@ -48,14 +55,7 @@ app.configure(configuration());
 
 // feathers-blob service
 const getPath = (pathStr: string): string => path.join(__dirname, '..', '..', '..', app.get(pathStr));
-const uploadsDir = getPath('uploads');
-const storage = multer.diskStorage({
-  destination: uploadsDir,
-  filename: function (req: any, file: any, cb: any) {
-    cb(null, file.originalname);
-  },
-});
-const upload = multer({ storage });
+
 
 
 // Enable security, CORS, compression, favicon and body parsing
@@ -76,7 +76,6 @@ app.configure(socketio());
 // Register Upload Service with multipart support
 
 app.use('/files',
-  upload.any(),
   new FilesService()
 );
 

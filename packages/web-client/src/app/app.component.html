@@ -1,5 +1,5 @@
 <h1>Let's upload some files!</h1>
 <div>
   <label for="files_input" id="files_input_label">Upload</label>
-  <input type="file" id="files_input" onchange="upload(files)" multiple>
+  <input type="file" id="files_input" (change)="upload($event.target.files)" multiple>
 </div>
