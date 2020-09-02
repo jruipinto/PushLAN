@@ -3,13 +3,14 @@ import * as path from "path";
 import { netAdapters } from './utils/net-adapters'
 
 /* feathers initialize */
-import feathers from '../../web-server/src/app';
+import appFeathers from '../../web-server/src/app';
 import logger from '../../web-server/src/logger';
-const port = feathers.get('port');
-const host = feathers.get('host');
+
 ipcMain.on('start-server', (startEvent, folderToShare) => {
 
-  feathers.service('/files').uploadsPath = path.join(folderToShare);
+  const feathers = appFeathers(path.join(folderToShare));
+  const port = feathers.get('port');
+  const host = feathers.get('host');
 
   const server = feathers.listen(port);
   process.on('unhandledRejection', (reason, p) =>

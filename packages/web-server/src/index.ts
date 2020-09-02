@@ -1,6 +1,6 @@
 import logger from './logger';
-import app from './app';
-
+import appFeathers from './app';
+const app = appFeathers();
 const port = app.get('port');
 const server = app.listen(port);
 
