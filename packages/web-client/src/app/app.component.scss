@@ -21,18 +21,3 @@ body {
   justify-content: center;
   margin: 0;
 }
-
-#files_input_label {
-  background-color: var(--primary);
-  border-radius: var(--border-radius);
-  color: var(--body-bg);
-  cursor: pointer;
-  font-family: var(--sans-serif);
-  padding: 1rem 4rem;
-  text-transform: uppercase;
-}
-
-#files_input {
-  opacity: 0;
-  width: 0;
-}

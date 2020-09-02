@@ -3,10 +3,12 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { UploadButtonComponent } from './components/upload-button/upload-button.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    UploadButtonComponent
   ],
   imports: [
     BrowserModule,
