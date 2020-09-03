@@ -18,7 +18,7 @@ export class UploadButtonComponent implements AfterViewInit {
       this.backend.service('files').find()
         .then(result => { console.log('results:', result); })
         .catch(err => { console.log('error finding files:', err); });
-    }
+    };
     this.backend.service('files').on('created', logFile);
   }
 
@@ -30,17 +30,17 @@ export class UploadButtonComponent implements AfterViewInit {
     const handleXHRError = (err): void => {
       setErrorInLabel(uploadLbl);
       console.log(err);
-    }
+    };
     const handleXHRLoad = (load): void => {
       setSuccessInLabel(uploadLbl);
       console.log('LOAD result:', load);
-    }
+    };
     const handleXHRProgress = (progress): void => {
       const { total, loaded } = progress;
       const progressPercent = `${Math.round((loaded * 100) / total)}%`;
       writeTheFollowing(progressPercent).to(uploadLbl);
       console.log('progress:', progressPercent);
-    }
+    };
     xhr.upload.addEventListener('error', handleXHRError);
     xhr.upload.addEventListener('load', handleXHRLoad);
     xhr.upload.addEventListener('progress', handleXHRProgress);
