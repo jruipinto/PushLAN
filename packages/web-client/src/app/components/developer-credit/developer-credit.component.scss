@@ -1,0 +1,21 @@
+:host {
+  position: absolute;
+  font-size: 1rem;
+  bottom: 8rem;
+  left: calc(50% - 8em);
+}
+svg {
+  margin-bottom: -4px;
+}
+a {
+  cursor: pointer;
+  text-decoration: underline;
+}
+p {
+  font-weight: 400;
+}
+@media screen and (min-width: 768px) {
+  :host {
+    bottom: 1rem;
+  }
+}

@@ -1,0 +1,10 @@
+:host{
+  background: url(../../../assets/icon.svg) no-repeat right;
+  opacity: 0.05;
+  position: fixed;
+  top: 6rem;
+  left: calc(50% - 50px);
+  width: 655px;
+  height: 655px;
+  z-index: -1;
+}
