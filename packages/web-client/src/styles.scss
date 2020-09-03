@@ -53,9 +53,10 @@ a,
   padding: 0.6rem 2.5rem;
 }
 .btn {
-  display: inline-flex;
   align-items: center;
-  justify-content: flex-start;
+  display: inline-flex;
+  font-size: 1rem;
+  justify-content: center;
   text-transform: uppercase;
   cursor: pointer;
 }
@@ -140,5 +141,47 @@ a,
   border-color: $disabled-color;
   color: $disabled-color;
 }
+.buttons-container {
+  align-items: center;
+  bottom: 0;
+  display: flex;
+  justify-content: space-evenly;
+  left: 0;
+  height: 6rem;
+  position: fixed;
+  width: 100%;
+}
+.buttons-container,
+.buttons-container .btn {
+  background-color: $primary-color;
+  color: $background-color;
+}
+.block {
+  display: block;
+}
 
-@media screen and (min-width: 768px) {}
+@media screen and (min-width: 768px) {
+  .container,
+  .buttons-container {
+    max-width: 600px;
+  }
+  .buttons-container {
+    bottom: 8rem;
+    justify-content: space-between;
+    left: calc(50% - 300px);
+    position: fixed;
+  }
+  .buttons-container,
+  .buttons-container .btn {
+    background-color: transparent;
+    color: $primary-color;
+    .primary {
+      background-color: $primary-color;
+      color: $background-color;
+    }
+    .primary:hover {
+      background-color: darken($color: $primary-color, $amount: 4%);
+      border-color: darken($color: $primary-color, $amount: 4%);
+    }
+  }
+}
