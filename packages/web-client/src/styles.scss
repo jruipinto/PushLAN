@@ -80,7 +80,7 @@ a,
 }
 
 .container {
-  max-width: 90%;
+  max-width: 95%;
   margin-left: auto;
   margin-right: auto;
   min-height: 100%;
@@ -156,6 +156,17 @@ a,
   background-color: $primary-color;
   color: $background-color;
 }
+.buttons-container .btn {
+  border-color: transparent;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+.buttons-container .btn svg {
+  margin-right: 0.3em;
+}
+.buttons-container .btn:hover {
+  border-color: transparent;
+}
 .block {
   display: block;
 }
@@ -163,7 +174,7 @@ a,
 @media screen and (min-width: 768px) {
   .container,
   .buttons-container {
-    max-width: 600px;
+    max-width: 500px;
   }
   .buttons-container {
     bottom: 8rem;
@@ -171,17 +182,43 @@ a,
     left: calc(50% - 300px);
     position: fixed;
   }
+
   .buttons-container,
   .buttons-container .btn {
     background-color: transparent;
+  }
+  .buttons-container .btn {
+    border-color: $primary-color;
     color: $primary-color;
-    .primary {
-      background-color: $primary-color;
-      color: $background-color;
-    }
-    .primary:hover {
-      background-color: darken($color: $primary-color, $amount: 4%);
-      border-color: darken($color: $primary-color, $amount: 4%);
-    }
+  }
+  .buttons-container .btn:hover {
+    background-color: lighten($color: $primary-color, $amount: 70%);
+    border-color: darken($color: $primary-color, $amount: 4%);
+    color: darken($color: $primary-color, $amount: 4%);
+  }
+  .buttons-container .btn svg path {
+    fill: $primary-color;
+  }
+  .buttons-container .btn:hover svg path {
+    fill: darken($color: $primary-color, $amount: 4%);
+  }
+  .buttons-container .primary {
+    background-color: $primary-color;
+    color: $background-color;
+  }
+  .buttons-container .primary:hover {
+    background-color: darken($color: $primary-color, $amount: 4%);
+    border-color: darken($color: $primary-color, $amount: 4%);
+    color: $background-color;
+  }
+  .buttons-container .primary svg path {
+    fill: $background-color;
+  }
+  .buttons-container .primary:hover svg path {
+    fill: $background-color;
+  }
+  .buttons-container .btn {
+    flex-direction: initial;
+    flex-wrap: initial;
   }
 }
