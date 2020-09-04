@@ -1,10 +1,15 @@
-:host{
+:host {
   background: url(../../../assets/icon.svg) no-repeat right;
   opacity: 0.05;
   position: fixed;
-  top: 6rem;
-  left: calc(50% - 50px);
+  top: 7.5rem;
+  left: calc(50% - 200px);
   width: 655px;
   height: 655px;
   z-index: -1;
+}
+@media screen and (min-width: 768px) {
+  :host {
+    left: calc(50% - 130px);
+  }
 }
