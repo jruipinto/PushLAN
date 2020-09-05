@@ -7,6 +7,7 @@ import { UploadButtonComponent } from './components/upload-button/upload-button.
 import { DownloadButtonComponent } from './components/download-button/download-button.component';
 import { DeveloperCreditComponent } from './components/developer-credit/developer-credit.component';
 import { BackgroundIllustrationComponent } from './components/background-illustration/background-illustration.component';
+import { AddressBarComponent } from './components/address-bar/address-bar.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { BackgroundIllustrationComponent } from './components/background-illustr
     UploadButtonComponent,
     DownloadButtonComponent,
     DeveloperCreditComponent,
-    BackgroundIllustrationComponent
+    BackgroundIllustrationComponent,
+    AddressBarComponent
   ],
   imports: [
     BrowserModule,

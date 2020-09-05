@@ -1,0 +1,25 @@
+:host {
+  align-items: flex-start;
+  display: flex;
+  justify-content: space-between;
+  min-width: 100%;
+}
+.nav-back-btn {
+  align-items: center;
+  background-color: transparent;
+  border: 0;
+  color: #294a4a;
+  cursor: pointer;
+  display: flex;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+.nav-back-btn svg {
+  margin-right: .7em;
+}
+p {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
