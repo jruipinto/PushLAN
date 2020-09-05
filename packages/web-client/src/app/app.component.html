@@ -1,6 +1,11 @@
-<div class="container">
+<main class="container">
   <h1>Lan Drive</h1>
   <app-address-bar></app-address-bar>
+  <ul class="files-container">
+    <li *ngFor="let item of filesList">
+      <app-list-item></app-list-item>
+    </li>
+  </ul>
 
   <div class="buttons-container">
     <app-upload-button></app-upload-button>
@@ -9,4 +14,4 @@
 
   <app-developer-credit></app-developer-credit>
   <app-background-illustration></app-background-illustration>
-</div>
+</main>
