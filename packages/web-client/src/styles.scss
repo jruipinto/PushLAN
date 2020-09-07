@@ -176,6 +176,9 @@ a,
   min-width: 100%;
   padding-left: calc(16px + 0.7rem);
 }
+.files-container > li {
+  margin-bottom: 1em;
+}
 
 @media screen and (min-width: 768px) {
   .container,
