@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ChangeDetectionStrategy } from '@angular/core';
 import { FeathersService } from 'src/app/shared/services/feathers.service';
 import { setErrorInLabel, setSuccessInLabel, writeTheFollowing } from './functions';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-upload-button',
   templateUrl: './upload-button.component.html',
@@ -23,7 +24,7 @@ export class UploadButtonComponent implements AfterViewInit {
   }
 
   public upload(filesList): void {
-    const apiURL = window.location.href + 'files';
+    const apiURL = environment.apiURL + 'files';
     const uploadLbl = document.getElementById('files_input_label');
     const xhr = new XMLHttpRequest();
     const formData = new FormData();

@@ -5,13 +5,15 @@ import * as io from 'socket.io-client';
 import feathers from '@feathersjs/feathers';
 import socketIO from '@feathersjs/socketio-client';
 
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class FeathersService {
 
   private feathers = feathers();                     // init socket.io
-  private socket = io(window.location.href);      // init feathers
+  private socket = io(environment.apiURL);      // init feathers
 
   constructor() {
     this.feathers
