@@ -13,7 +13,11 @@
         fill="#294A4A" />
     </svg>
   </div>
-  <p>{{file.name}}</p>
+  <p>
+    <span *ngIf="file.name.length <= 20; else bigger">{{file.name}}</span>
+    <ng-template #bigger>{{file.name | slice:0:12}}...{{file.name | slice:file.name.length-8:file.name.length}}
+    </ng-template>
+  </p>
 </div>
 <div class="check">
   <svg *ngIf="file.checked" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
