@@ -1,43 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+import { FeathersService } from './shared/services/feathers.service';
+import { ListItem } from './components/list-item/list-item.model';
+import { getFilesListFrom } from './functions';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  public filesList = [
-    {
-      name: 'Funny things',
-      checked: true,
-      type: 'folder'
-    },
-    {
-      name: 'no1 funny thing',
-      checked: false,
-      type: 'file'
-    },
-    {
-      name: 'also funny',
-      checked: false,
-      type: 'file'
-    },
-    {
-      name: 'this is funny too',
-      checked: false,
-      type: 'file'
-    }, {
-      name: 'Funny things',
-      checked: true,
-      type: 'folder'
-    },
-    {
-      name: 'another boring folder',
-      checked: false,
-      type: 'folder'
-    }
-  ]
+export class AppComponent implements AfterViewInit {
+  public filesList: ListItem[];
+  public filesService = this.backend.service('files');
 
-  constructor() {
+  constructor(private backend: FeathersService) {
+  }
+  async ngAfterViewInit(): Promise<void> {
+    this.filesList = await getFilesListFrom(this.filesService);
+    this.filesService.on('created', async () => {
+      this.filesList = await getFilesListFrom(this.filesService);
+    })
   }
 }
