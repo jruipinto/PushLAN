@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { ListItem } from './list-item';
+import { ListItem } from './list-item.model';
 
 @Component({
   selector: 'app-list-item',
