@@ -15,8 +15,8 @@ import socketio from '@feathersjs/socketio';
 import { Application } from './declarations';
 import logger from './logger';
 import channels from './channels';
-const fs = require('fs');
 const multer = require('multer');
+const dirTree = require('directory-tree-promise');
 
 
 export default function (uploadsPath = '/uploads'): Application {
@@ -62,9 +62,7 @@ export default function (uploadsPath = '/uploads'): Application {
     upload.any(),
     {
       async find() {
-        return new Promise((resolve, reject) => {
-          fs.readdir(uploadsPath, (err: any, files: any) => err ? reject(err) : resolve(files));
-        });
+        return await dirTree(uploadsPath);
       },
       async create(data: any) {
         return data;
