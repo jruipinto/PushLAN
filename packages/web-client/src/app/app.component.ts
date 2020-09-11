@@ -1,7 +1,6 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { FeathersService } from './shared/services/feathers.service';
 import { ListItem } from './components/list-item/list-item.model';
-import { getFilesListFrom } from './functions';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +10,14 @@ import { getFilesListFrom } from './functions';
 export class AppComponent implements AfterViewInit {
   public filesList: ListItem[];
   public filesService = this.backend.service('files');
+  public filesListPromise = this.filesService.find() as Promise<ListItem[]>;
 
   constructor(private backend: FeathersService) {
   }
   async ngAfterViewInit(): Promise<void> {
-    this.filesList = await getFilesListFrom(this.filesService);
+    this.filesList = await this.filesListPromise;
     this.filesService.on('created', async () => {
-      this.filesList = await getFilesListFrom(this.filesService);
-    })
+      this.filesList = await this.filesListPromise;
+    });
   }
 }

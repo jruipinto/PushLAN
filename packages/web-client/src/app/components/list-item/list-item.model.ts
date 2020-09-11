@@ -1,5 +1,9 @@
 export interface ListItem {
-  type: 'file' | 'folder';
+  checked?: boolean;
+  children: ListItem[];
+  extension: string;
   name: string;
-  checked: boolean;
+  path: string;
+  size: number;
+  type: 'file' | 'directory';
 }
