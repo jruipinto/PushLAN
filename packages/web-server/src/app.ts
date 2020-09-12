@@ -16,7 +16,7 @@ import { Application } from './declarations';
 import logger from './logger';
 import channels from './channels';
 const multer = require('multer');
-const dirTree = require('directory-tree-promise');
+import dirTree from './utils/directory-tree';
 
 
 export default function (uploadsPath = '/uploads'): Application {

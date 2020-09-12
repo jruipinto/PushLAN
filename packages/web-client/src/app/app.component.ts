@@ -10,7 +10,7 @@ import { ListItem } from './components/list-item/list-item.model';
 export class AppComponent implements AfterViewInit {
   public filesList: ListItem[];
   public filesService = this.backend.service('files');
-  public filesListPromise = this.filesService.find() as Promise<ListItem[]>;
+  public filesListPromise = this.filesService.find().then(rootPath => rootPath.children) as Promise<ListItem[]>;
 
   constructor(private backend: FeathersService) {
   }
