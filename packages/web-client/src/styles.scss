@@ -42,6 +42,9 @@ h2 {
 p {
   letter-spacing: -0.01em;
 }
+ul {
+  margin: 0;
+}
 a,
 .btn,
 .input-text {
@@ -86,11 +89,11 @@ a,
 .container {
   margin-left: auto;
   margin-right: auto;
-  min-height: 100%;
+  height: calc(100vh - 16rem);
 }
 .row {
   display: block;
-  margin-bottom: 1rem;
+  padding-bottom: 1rem;
 }
 .primary {
   background-color: $primary-color;
@@ -170,17 +173,27 @@ a,
 .buttons-container .btn:hover {
   border-color: transparent;
 }
-.files-container {
+ul {
+  height: calc(100% - 11rem);
   list-style-type: none;
-  margin-top: 2.5rem;
+  padding-top: 2.5rem;
   min-width: 100%;
   padding-left: calc(16px + 0.7rem);
 }
-.files-container > li {
-  margin-bottom: 1em;
+ul li {
+  padding-bottom: 1em;
+}
+.files-container {
+  height: 100%;
+  min-width: 100%;
+  padding-right: 1rem;
+  overflow-y: auto;
 }
 
 @media screen and (min-width: 768px) {
+  .container {
+    height: calc(100vh - 16rem);
+  }
   .container,
   .buttons-container {
     max-width: var(--container-max-width);
