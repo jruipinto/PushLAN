@@ -10,7 +10,11 @@
   overflow: hidden;
 }
 .check {
+  cursor: pointer;
   float: right;
+}
+.check:hover path {
+  fill: var(--primary-color);
 }
 .icon {
   display: inline-block;

@@ -5,8 +5,12 @@
 $primary-color: #294a4a;
 $disabled-color: #b5c7c7;
 $background-color: #fcfcfc;
+
 :root {
   --container-max-width: 500px;
+  --primary-color: $primary-color;
+  --disabled-color: $disabled-color;
+  --background-color: $background-color;
 }
 
 * {
@@ -15,11 +19,11 @@ $background-color: #fcfcfc;
 html {
   font-family: "Roboto", sans-serif;
   font-size: 12px;
-  color: $primary-color;
+  color: var(--primary-color);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $background-color;
+  background-color: var(--background-color);
 }
 
 body {
@@ -48,12 +52,12 @@ ul {
 a,
 .btn,
 .input-text {
-  color: $primary-color;
+  color: var(--primary-color);
 }
 .btn,
 .input-text {
   background-color: transparent;
-  border: 2px solid $primary-color;
+  border: 2px solid var(--primary-color);
   box-sizing: border-box;
   border-radius: 5px;
   min-width: 210px;
