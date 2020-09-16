@@ -1,4 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { map } from 'rxjs/operators';
+import { UIService, UI } from 'src/app/shared/state';
 
 @Component({
   selector: 'app-address-bar',
@@ -6,11 +8,11 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./address-bar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AddressBarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+export class AddressBarComponent {
+  public currentFolderPath$ = this.uiService.state$
+    .pipe(
+      map((uiState: UI) => uiState.currentFolderPath)
+    );
+  constructor(private uiService: UIService) { }
 
 }
