@@ -22,7 +22,7 @@ async function scanFolder(
             .then(
               fileProperties => ({
                 name: fileName,
-                path: join(path, fileName),
+                path: join(path, fileName).replace(/\\/g, '/'),
                 accessedAt: fileProperties.atime,
                 createdAt: fileProperties.birthtime,
                 updatedAt: fileProperties.mtime,
