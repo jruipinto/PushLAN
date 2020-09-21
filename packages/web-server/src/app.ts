@@ -16,7 +16,7 @@ import { Application } from './declarations';
 import logger from './logger';
 import channels from './channels';
 const multer = require('multer');
-import dirTree from './utils/directory-tree';
+import scanFolder from './utils/scan-folder';
 
 
 export default function (uploadsPath = '/uploads'): Application {
@@ -62,7 +62,7 @@ export default function (uploadsPath = '/uploads'): Application {
     upload.any(),
     {
       async find() {
-        return await dirTree(uploadsPath);
+        return await scanFolder(uploadsPath);
       },
       async create(data: any) {
         return data;
