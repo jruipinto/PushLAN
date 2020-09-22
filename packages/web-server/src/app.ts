@@ -61,8 +61,12 @@ export default function (uploadsPath = '/uploads'): Application {
   app.use('/files',
     upload.any(),
     {
-      async find() {
-        return await scanFolder(uploadsPath);
+      async find(params) {
+        console.log(uploadsPath, params);
+        return await scanFolder(path.join(uploadsPath, params?.query?.path ?? ''))
+          .then(files => files.map(
+            (file: any) => ({ ...file, path: path.join(file.path).replace(uploadsPath, '') })
+          ));
       },
       async create(data: any) {
         return data;
