@@ -5,11 +5,11 @@ import { UIStateAbstraction } from 'src/app/shared/abstraction-classes';
 export interface UI {
   currentFolderPath: string;
   currentFolderItems: ListItem[];
-};
+}
 
 const defaults: UI = {
   currentFolderPath: '/',
-  currentFolderItems: null
+  currentFolderItems: []
 };
 
 @Injectable({ providedIn: 'root' })
