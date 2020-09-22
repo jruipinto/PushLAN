@@ -3,7 +3,7 @@
   <app-address-bar></app-address-bar>
   <ul>
     <div class="files-container">
-      <li *ngFor="let item of filesList">
+      <li *ngFor="let item of filesList$ | async">
         <app-list-item [file]="item"></app-list-item>
       </li>
     </div>

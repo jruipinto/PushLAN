@@ -1,7 +1,8 @@
 import { Component, AfterViewInit } from '@angular/core';
-import { FeathersService } from './shared/services/feathers.service';
+import { FilesService } from './shared/services/files.service';
 import { ListItem } from './components/list-item/list-item.model';
 import { UIService, UI } from 'src/app/shared/state';
+import { concatMap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -9,20 +10,15 @@ import { UIService, UI } from 'src/app/shared/state';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements AfterViewInit {
-  public filesList: ListItem[];
-  public filesService = this.backend.service('files');
-  public filesListPromise = this.filesService.find().then(rootPath => rootPath.children) as Promise<ListItem[]>;
+  public filesList$ = this.uiService.state$.pipe(map(ui => ui.currentFolderItems));
 
   constructor(
-    private backend: FeathersService,
-    private uiService: UIService
+    private uiService: UIService,
+    private filesService: FilesService
   ) {
   }
   async ngAfterViewInit(): Promise<void> {
-    this.uiService.patchState({ currentFolderItems: await this.filesListPromise }).subscribe();
-    this.filesList = await this.filesListPromise;
-    this.filesService.on('created', async () => {
-      this.filesList = await this.filesListPromise;
-    });
+    this.filesService.find$().subscribe();
+    this.filesService.onCreated$().subscribe();
   }
 }
