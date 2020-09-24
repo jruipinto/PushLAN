@@ -26,7 +26,9 @@ export default function (uploadsPath = '/uploads'): Application {
   // Don't remove this comment. It's needed to format import lines nicely.
 
   const storage = multer.diskStorage({
-    destination: uploadsPath,
+    destination: (req: any, file: any, cb: any) => {
+      cb(null, path.join(uploadsPath, file.fieldname));
+    },
     filename: function (req: any, file: any, cb: any) {
       cb(null, file.originalname);
     },
@@ -62,7 +64,6 @@ export default function (uploadsPath = '/uploads'): Application {
     upload.any(),
     {
       async find(params) {
-        console.log(uploadsPath, params);
         return await scanFolder(path.join(uploadsPath, params?.query?.path ?? ''))
           .then(files => files.map(
             (file: any) => ({ ...file, path: path.join(file.path).replace(uploadsPath, '') })

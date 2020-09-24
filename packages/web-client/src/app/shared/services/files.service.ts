@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { from, fromEvent, Observable } from 'rxjs';
-import { concatMap, tap } from 'rxjs/operators';
+import { concatMap, first, tap } from 'rxjs/operators';
 import { UIService } from '../state';
 import { FeathersService } from './feathers.service';
 
@@ -29,7 +29,8 @@ export class FilesService {
   onCreated$(): Observable<any> {
     return fromEvent(this.filesAPI, 'created')
       .pipe(
-        concatMap(() => this.find$())
+        concatMap(() => this.uiService.state$.pipe(first())),
+        concatMap(({ currentFolderPath }) => this.find$({ query: { path: currentFolderPath } }))
       );
   }
 }

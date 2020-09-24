@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ChangeDetectionStrategy } from '@angular/core';
-import { FeathersService } from 'src/app/shared/services/feathers.service';
 import { setErrorInLabel, setSuccessInLabel, writeTheFollowing } from './functions';
 import { environment } from 'src/environments/environment';
+import { UIService } from 'src/app/shared/state';
 @Component({
   selector: 'app-upload-button',
   templateUrl: './upload-button.component.html',
@@ -9,23 +9,21 @@ import { environment } from 'src/environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class UploadButtonComponent implements AfterViewInit {
+  public currentFolderPath: string;
 
-  constructor(private backend: FeathersService) {
+  constructor(private uiService: UIService) {
   }
 
   ngAfterViewInit(): void {
-    const logFile = (file): void => {
-      console.log('New file was uploaded:', file);
-      this.backend.service('files').find()
-        .then(result => { console.log('results:', result); })
-        .catch(err => { console.log('error finding files:', err); });
-    };
-    this.backend.service('files').on('created', logFile);
+    this.uiService.state$.subscribe(
+      ({ currentFolderPath }) => this.currentFolderPath = currentFolderPath
+    );
   }
 
   public upload(filesList): void {
     const apiURL = environment.apiURL + 'files';
     const uploadLbl = document.getElementById('files_input_label');
+    const uploadLblInitialState = uploadLbl.innerHTML;
     const xhr = new XMLHttpRequest();
     const formData = new FormData();
     const handleXHRError = (err): void => {
@@ -33,7 +31,7 @@ export class UploadButtonComponent implements AfterViewInit {
       console.log(err);
     };
     const handleXHRLoad = (load): void => {
-      setSuccessInLabel(uploadLbl);
+      setSuccessInLabel(uploadLbl).andThenResetTo(uploadLblInitialState);
       console.log('LOAD result:', load);
     };
     const handleXHRProgress = (progress): void => {
@@ -46,7 +44,8 @@ export class UploadButtonComponent implements AfterViewInit {
     xhr.upload.addEventListener('load', handleXHRLoad);
     xhr.upload.addEventListener('progress', handleXHRProgress);
     Array.from(filesList).forEach((file: any) => {
-      formData.append('file', file);
+      // fieldname = this.currentFolderPath to let us upload to inner folders
+      formData.append(this.currentFolderPath, file);
     });
     xhr.open('POST', apiURL);
     xhr.send(formData);
