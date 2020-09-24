@@ -16,7 +16,7 @@
 }
 html {
   font-family: "Roboto", sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--primary-color);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -55,7 +55,7 @@ a,
 .btn,
 .input-text {
   background-color: transparent;
-  border: 2px solid var(--primary-color);
+  border: 1px solid var(--primary-color);
   box-sizing: border-box;
   border-radius: 5px;
   min-width: 210px;
@@ -179,15 +179,16 @@ ul {
   list-style-type: none;
   padding-top: 2.5rem;
   min-width: 100%;
-  padding-left: calc(16px + 0.7rem);
+  padding-left: 0;
 }
 ul li {
   padding-bottom: 1em;
 }
 .files-container {
+  border: 1px solid var(--disabled-color);
   height: 100%;
   min-width: 100%;
-  padding-right: 1rem;
+  padding: 1rem;
   overflow-y: auto;
 }
 
