@@ -16,7 +16,11 @@ export class ListItemComponent implements OnInit {
   }
   openFolder(item: ListItem): void {
     if (item.isDirectory) {
-      this.filesService.find$({ query: { path: item.path } }).subscribe();
+      this.filesService.find$({
+        query: {
+          path: item.path.replace(/\\/g, '/')
+        }
+      }).subscribe();
     }
   }
 
