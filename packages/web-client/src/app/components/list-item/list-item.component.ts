@@ -1,6 +1,8 @@
 import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
 import { FilesService } from 'src/app/shared/services/files.service';
 import { ListItem } from './list-item.model';
+import { environment } from 'src/environments/environment';
+import { downloadFile } from './functions';
 
 @Component({
   selector: 'app-list-item',
@@ -23,5 +25,10 @@ export class ListItemComponent implements OnInit {
       }).subscribe();
     }
   }
-
+  download(item: ListItem): void {
+    if (item.isFile) {
+      downloadFile(environment.apiURL + 'download?path=' + item.path, item.name)
+        .then(() => { });
+    }
+  }
 }
