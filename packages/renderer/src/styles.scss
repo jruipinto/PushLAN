@@ -1,24 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap");
 
-$primary-color: #294a4a;
-$disabled-color: #b5c7c7;
-$background-color: #fcfcfc;
+:root {
+  --container-max-width: 600px;
+  --primary-color: #294a4a;
+  --danger-color: #eb5757;
+  --disabled-color: #b5c7c7;
+  --background-color: #fcfcfc;
+  --darken: brightness(0.92);
+  --lighten: brightness(1.7);
+}
+
+* {
+  box-sizing: border-box;
+}
 
 html {
   font-family: "Roboto", sans-serif;
   font-size: 11px;
   font-weight: 400;
-  color: $primary-color;
+  color: var(--primary-color);
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: $background-color;
+  background-color: var(--background-color);
 }
 
 body {
-  min-height: calc(100vh - 4rem);
-  width: calc(100% - 4rem);
+  min-height: 100%;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0;
@@ -41,13 +51,13 @@ p {
 a,
 .btn,
 .input-text {
-  color: $primary-color;
+  color: var(--primary-color);
   font-weight: 400;
 }
 .btn,
 .input-text {
   background-color: transparent;
-  border: 1px solid $primary-color;
+  border: 1px solid var(--primary-color);
   box-sizing: border-box;
   border-radius: 5px;
   min-width: 210px;
@@ -60,8 +70,8 @@ a,
   text-transform: uppercase;
   cursor: pointer;
 }
-.btn:hover{
-  background-color: lighten($color: $primary-color, $amount: 75%);
+.btn:not([disabled]):hover {
+  filter: var(--lighten);
 }
 .input-group {
   .btn {
@@ -80,7 +90,7 @@ a,
 }
 
 .container {
-  max-width: 600px;
+  max-width: var(--container-max-width);
   margin-left: auto;
   margin-right: auto;
   min-height: 100%;
@@ -90,12 +100,20 @@ a,
   margin-bottom: 1rem;
 }
 .primary {
-  background-color: $primary-color;
-  color: $background-color;
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
 }
-.primary:hover {
-  background-color: darken($color: $primary-color, $amount: 4%);
-  border-color: darken($color: $primary-color, $amount: 4%);
+.danger {
+  background-color: var(--danger-color);
+  border-color: var(--danger-color);
+}
+.primary,
+.danger {
+  color: var(--background-color);
+}
+.primary:not([disabled]):hover,
+.danger:not([disabled]):hover {
+  filter: var(--darken);
 }
 .mt-0 {
   margin-top: 0;
@@ -122,22 +140,22 @@ a,
   cursor: default;
 }
 .btn:disabled {
-  background-color: $background-color;
-  border-color: $disabled-color;
-  color: $disabled-color;
+  background-color: var(--background-color);
+  border-color: var(--disabled-color);
+  color: var(--disabled-color);
   path {
-    fill: $disabled-color;
+    fill: var(--disabled-color);
   }
 }
 .btn.primary:disabled {
-  background-color: $disabled-color;
-  border-color: $disabled-color;
-  color: $background-color;
+  background-color: var(--disabled-color);
+  border-color: var(--disabled-color);
+  color: var(--background-color);
   path {
-    fill: $background-color;
+    fill: var(--background-color);
   }
 }
 .input-text:disabled {
-  border-color: $disabled-color;
-  color: $disabled-color;
+  border-color: var(--disabled-color);
+  color: var(--disabled-color);
 }
