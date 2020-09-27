@@ -1,8 +1,8 @@
 {
-  "name": "root",
-  "version": " 0.0.1",
-  "description": "Lan-drive replaces your pen-drive by letting your share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
-  "private": true,
+  "name": "lan-drive-app",
+  "version": " 1.0.0",
+  "description": "Lan-drive replaces your pen-drive by letting you share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
+  "private": false,
   "main": "./dist/app/main/src/main.js",
   "author": {
     "name": "J Rui Pinto",
