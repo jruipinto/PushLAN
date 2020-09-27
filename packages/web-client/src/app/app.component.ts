@@ -1,8 +1,7 @@
 import { Component, AfterViewInit } from '@angular/core';
 import { FilesService } from './shared/services/files.service';
-import { ListItem } from './components/list-item/list-item.model';
-import { UIService, UI } from 'src/app/shared/state';
-import { concatMap, map } from 'rxjs/operators';
+import { UIService } from 'src/app/shared/state';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',

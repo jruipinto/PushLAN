@@ -2,11 +2,15 @@ import { app, BrowserWindow, Menu, ipcMain } from "electron";
 import * as path from "path";
 import { netAdapters } from './utils/net-adapters'
 
-/* feathers initialize */
+/* **********************************
+   Web-server (feathersjs) initialize
+************************************/
 import appFeathers from '../../web-server/src/app';
 import logger from '../../web-server/src/logger';
 
-ipcMain.on('start-server', (startEvent, folderToShare) => {
+// Create a feathersjs web-server when
+// renderer emits 'start-serving' event
+ipcMain.on('start-serving', (event, folderToShare) => {
 
   const feathers = appFeathers(path.join(folderToShare));
   const port = feathers.get('port');
@@ -21,12 +25,15 @@ ipcMain.on('start-server', (startEvent, folderToShare) => {
     logger.info('Feathers application started on http://%s:%d', host, port)
   );
 
-  startEvent.returnValue = {
+  // return the available netAdapters (ip addresses) to renderer
+  event.returnValue = {
     webServerStarted: true,
     netAdpaters: netAdapters()
   };
 });
-/* end */
+/* **********************************************/
+
+
 
 function createWindow() {
   // Create the browser window.

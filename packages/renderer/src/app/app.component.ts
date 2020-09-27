@@ -7,41 +7,42 @@ import { ElectronService } from 'ngx-electron';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public webServerStarted = false;
-  public webServerURL: string;
-  public QR: string = null;
-  public urlList = [
-    'http://192.168.4.26:3030',
-    'http://192.168.99.3:3030',
-    'http://192.168.47.1:3030'
-  ];
-  public sharedFolder: string = null;
+  alternativeURLs: string[] = [];
+  folderToShare: string = null;
+  QR: string = null;
+  webServerStarted = false;
+  webServerURL: string;
 
-  constructor(private electronService: ElectronService) { }
+  constructor(private electron: ElectronService) { }
 
-  public startWebServer(): void {
-    if (this.electronService.isElectronApp) {
+  // Start web-server and share folderToShare
+  startServing(folderToShare: string): void {
+    if (this.electron.isElectronApp) {
       const {
         webServerStarted,
         netAdpaters
-      } = this.electronService.ipcRenderer.sendSync('start-server', this.sharedFolder);
+      } = this.electron.ipcRenderer.sendSync('start-serving', folderToShare);
       this.webServerStarted = webServerStarted ?? false;
-      this.urlList = netAdpaters.map(netAdpater => 'http://' + netAdpater.address + ':3030');
-      this.QR = this.urlList[0];
+      this.alternativeURLs = netAdpaters.map(netAdpater => 'http://' + netAdpater.address + ':3030');
+      this.webServerURL = this.alternativeURLs[0];
+      this.QR = this.webServerURL;
     } else {
-      console.log('this.electronService.isElectronApp === false');
+      console.log('this.electron.isElectronApp === false');
     }
   }
 
-  public stopWebServer(): void {
-    this.electronService.remote.app.quit();
+  // Stop web-server
+  stopServing(): void {
+    this.electron.remote.app.quit();
   }
 
-  public searchFolderToShare(): void {
-    this.electronService.remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
-      .then(({ filePaths }) => this.sharedFolder = filePaths[0])
+  // Show file explorer to let user select sharedFolder
+  async selectFolder(): Promise<void> {
+    this.folderToShare = await this.electron.remote.dialog.showOpenDialog({ properties: ['openDirectory'] })
+      .then(({ filePaths }) => filePaths[0])
       .catch(err => {
-        this.electronService.remote.dialog.showErrorBox('Error with choosen folder', err);
+        this.electron.remote.dialog.showErrorBox('Error with choosen folder', err);
+        return '';
       });
   }
 }
