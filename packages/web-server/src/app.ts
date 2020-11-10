@@ -67,7 +67,7 @@ export default function (uploadsPath = '/uploads'): Application {
 
     {
       // returns files inside the 'path' requested by client
-      async find(params) {
+      async find(params: any) {
         const requestedFolder = join(uploadsPath, params?.query?.path ?? '');
         function clip(_path: string) {
           return {
