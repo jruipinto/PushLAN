@@ -1,6 +1,7 @@
 import { app, BrowserWindow, Menu, ipcMain } from "electron";
 import * as path from "path";
-import { netAdapters } from './utils/net-adapters'
+import { netAdapters } from './utils/net-adapters';
+import { autoUpdater } from "electron-updater";
 
 /* **********************************
    Web-server (feathersjs) initialize
@@ -67,6 +68,8 @@ app.on("ready", () => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
+
+  autoUpdater.checkForUpdatesAndNotify();
 });
 
 // Quit when all windows are closed, except on macOS. There, it's common
