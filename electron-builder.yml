@@ -59,6 +59,5 @@ directories:
   # buildResources: "resources"
   output: "release"
 
-# publish:
-#   provider: "generic"
-#   url: "https://batchlabsdist.blob.core.windows.net/releases"
+publish:
+  releaseType: "release"
