@@ -8,7 +8,6 @@ files:
   - "dist/"
   - "package.json"
 
-
 # # Mac OS configuration
 # mac:
 #   icon: "src/app/assets/images/icon.icns"
@@ -58,3 +57,7 @@ deb:
 directories:
   # buildResources: "resources"
   output: "release"
+
+publish:
+  provider: "github"
+  releaseType: "release"
