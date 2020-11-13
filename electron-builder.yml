@@ -58,6 +58,3 @@ deb:
 directories:
   # buildResources: "resources"
   output: "release"
-
-publish:
-  releaseType: "release"

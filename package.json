@@ -1,6 +1,6 @@
 {
     "name": "lan-drive-app",
-    "version": " 1.1.0",
+    "version": " 1.1.2",
     "description": "Lan-drive replaces your pen-drive by letting you share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
     "private": false,
     "repository": "github:jruipinto/lan-drive-app",
@@ -15,9 +15,10 @@
         "serve:quick": "npm run build:quick && npm run electron:start",
         "build": "npm run clean && lerna bootstrap --hoist && ngcc && lerna run build && lerna run buildMain",
         "build:quick": "npm run clean && lerna run build && lerna run buildMain",
-        "release": "npm run build && electron-builder",
         "clean": "shx rm -Rf ./dist/ && shx rm -Rf ./release/",
-        "electron:start": "electron ./dist/app/main/src/main.js"
+        "electron:start": "electron ./dist/app/main/src/main.js",
+        "pack": "npm run build && electron-builder --dir",
+        "dist": "npm run build && electron-builder"
     },
     "devDependencies": {
         "electron": "^10.1.5",
