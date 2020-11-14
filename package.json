@@ -1,6 +1,6 @@
 {
     "name": "lan-drive-app",
-    "version": "1.1.5",
+    "version": "1.1.6",
     "description": "Lan-drive replaces your pen-drive by letting you share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
     "private": false,
     "repository": "github:jruipinto/lan-drive-app",
