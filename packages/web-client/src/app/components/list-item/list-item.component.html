@@ -14,10 +14,10 @@
   </div>
   <p>{{ file.name }}</p>
 </div>
-<div class="check" *ngIf="file.isFile" (click)="download(file)">
+<a class="check" *ngIf="file.isFile" [href]="environment.apiURL + 'download?path=' + file.path" [download]="file.name">
   <svg width="17" height="18" viewBox="0 0 17 18" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M17 16.875C17 16.2563 16.4536 15.75 15.7857 15.75L1.21429 15.75C0.546429 15.75 0 16.2563 0 16.875C0 17.4938 0.546429 18 1.21429 18L15.7857 18C16.4536 18 17 17.4938 17 16.875ZM14.0736 6.75H12.1429L12.1429 1.125C12.1429 0.50625 11.5964 0 10.9286 0H6.07143C5.40357 0 4.85714 0.50625 4.85714 1.125V6.75H2.92643C1.84571 6.75 1.29929 7.965 2.06429 8.67375L7.63786 13.8375C8.11143 14.2763 8.87643 14.2763 9.35 13.8375L14.9236 8.67375C15.6886 7.965 15.1543 6.75 14.0736 6.75Z"
       fill="#B5C7C7" />
   </svg>
-</div>
+</a>
