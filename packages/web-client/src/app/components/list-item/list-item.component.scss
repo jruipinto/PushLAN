@@ -5,8 +5,7 @@
 .clickable {
   cursor: pointer;
   display: inline-block;
-  min-width: 50%;
-  max-width: calc(100% - 30px);
+  width: calc(100% - 30px);
   overflow: hidden;
 }
 .check {
@@ -18,12 +17,14 @@
 }
 .icon {
   display: inline-block;
-  margin-right: 0.7rem;
+  margin-right: 7px;
 }
 p {
   display: inline-block;
   margin: 0;
-  max-width: calc(100% - 15px);
+  max-width: calc(100% - 45px);
   overflow: hidden;
   position: relative;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
