@@ -96,10 +96,10 @@ export default function (uploadsPath = '/uploads'): Application {
   // downloads requestFile
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   app.get('/download', (req, res, next) => {
-    const requestedFile = req?.query?.path ?? false;
-    if (requestedFile && typeof requestedFile === 'string') {
+    const requestedFileName = req?.query?.path ?? false;
+    if (requestedFileName && typeof requestedFileName === 'string') {
       res.download(
-        join(uploadsPath, requestedFile)
+        join(uploadsPath, requestedFileName)
       );
     }
   });
