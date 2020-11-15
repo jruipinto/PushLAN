@@ -1,7 +1,4 @@
 <div class="container">
-
-  <h1>Welcome to Lan Drive App</h1>
-
   <div class="row">
     <div class="input-group">
       <button type="button" class="btn" id="btn-shared-folder" (click)="selectFolder()" [disabled]="webServerStarted">
@@ -9,35 +6,46 @@
         Shared folder
       </button>
       <input type="text" class="input-text" name="shared-folder" id="input-shared-folder" [(ngModel)]="folderToShare"
-        [disabled]="webServerStarted">
+        [disabled]="webServerStarted" />
     </div>
   </div>
 
   <div class="row">
-    <div *ngIf="!webServerStarted;else webServerNotStarted">
-      <button type="button" class="btn primary" (click)='startServing(folderToShare)' [disabled]="!folderToShare">
+    <div *ngIf="!webServerStarted; else webServerNotStarted">
+      <button type="button" class="btn primary" (click)="startServing(folderToShare)" [disabled]="!folderToShare">
         <app-start-icon></app-start-icon>
         Start serving
       </button>
     </div>
     <ng-template #webServerNotStarted>
-      <button type="button" class="btn danger" (click)='stopServing()'>
+      <button type="button" class="btn danger" (click)="stopServing()">
         <app-stop-icon></app-stop-icon>
         Stop serving
       </button>
     </ng-template>
   </div>
 
+  <div class="row" *ngIf="!webServerStarted">
+    <p>
+      Welcome to PushLAN! Select a folder and start the share on "start serving"
+      button.
+    </p>
+  </div>
+
   <div class="row" *ngIf="webServerStarted">
-    <p class="mt-2 mb-0">Serving the shared folder.</p>
-    <p class="mt-0 mb-2">Copy the following URL to the browser of your devices or scan the QR code.</p>
-    <h2 class="text-align-center">{{webServerURL}}</h2>
+    <p class="mt-2 mb-0">PushLAN is serving the selected folder.</p>
+    <p class="mt-0 mb-2">
+      Copy the following URL to the browser of your devices or scan the QR code.
+    </p>
+    <h2 class="text-align-center">{{ webServerURL }}</h2>
     <qrcode class="text-align-center" [qrdata]="QR" [width]="100" [errorCorrectionLevel]="'M'"></qrcode>
-    <p>If you can’t access the URL above, try these alternative URL’s or check your local area network connection.</p>
-    <p *ngFor="let url of alternativeURLs" class="mt-0 mb-0">{{url}}</p>
+    <p>
+      If you can’t access the URL above, try these alternative URL’s or check
+      your local area network connection.
+    </p>
+    <p *ngFor="let url of alternativeURLs" class="mt-0 mb-0">{{ url }}</p>
   </div>
 
   <app-developer-credit></app-developer-credit>
   <app-background-ilustration></app-background-ilustration>
-
 </div>

@@ -1,6 +1,6 @@
-# lan-drive
+# pushlan
 
-> Lan-drive replaces your pen-drive by letting your share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.
+> pushlan replaces your pen-drive by letting your share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.
 
 ## About
 
@@ -14,7 +14,7 @@ Getting up and running is as easy as 1, 2, 3.
 2. Install your dependencies
 
     ```
-    cd path/to/lan-drive
+    cd path/to/pushlan
     npm install
     ```
 

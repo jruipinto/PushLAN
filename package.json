@@ -1,9 +1,9 @@
 {
-    "name": "lan-drive-app",
-    "version": "1.1.7",
-    "description": "Lan-drive replaces your pen-drive by letting you share a folder on your local area network without the hassles of configuring a shared folder on windows, samba server or any other technique.",
+    "name": "pushlan",
+    "version": "2.0.0",
+    "description": "PushLAN helps you share a folder with other devices in LAN.",
     "private": false,
-    "repository": "github:jruipinto/lan-drive-app",
+    "repository": "github:jruipinto/pushlan",
     "license": "MIT",
     "main": "./dist/app/main/src/main.js",
     "author": {
